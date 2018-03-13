@@ -1,0 +1,13 @@
+
+div.ui.green.raised.card div.content{
+	background-color: lightgreen;
+}
+div.ui.orange.raised.card div.content{
+	background-color: orange;
+}
+div.ui.red.raised.card div.content{
+	background-color: indianred;
+}
+body{
+	padding-top: 50px;
+}
