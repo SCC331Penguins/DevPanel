@@ -27,6 +27,7 @@
     "axios": "0.13.1",
     "babel-preset-es2016": "^6.24.1",
     "bootstrap": "^3.3.7",
+    "ecstatic": "^2.0.0",
     "history": "^3.0.0",
     "moment": "^2.21.0",
     "prop-types": "^15.6.1",
