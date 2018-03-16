@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import CurrentStatus from '../../components/currentStatus';
 import Alerts from '../../components/alerts';
 import { TopBar } from '../../components/utils';
+import Routers from '../Routers';
 export default class Home extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
@@ -13,6 +14,7 @@ export default class Home extends Component {
       <TopBar />
       <Alerts />
       <CurrentStatus />
+      <Routers />
     </div>);
   }
 }

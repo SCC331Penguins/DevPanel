@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Segment, Checkbox, Form, Button, Header} from 'semantic-ui-react';
+import { Segment, Checkbox, Form, Button, Header, Message} from 'semantic-ui-react';
 import API from '../../utils/API';
 export default class Home extends Component {
   constructor(props){
@@ -8,15 +8,19 @@ export default class Home extends Component {
       username:'',
       password:'',
       stayIn:true,
+      message:null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(){
     const { username, password } = this.state;
-    API.login(username, password).then(response =>
+    API.login(username, password).then(token =>{
+      if (!token) {
+        throw new Error('Invalid Creds')
+      }
       this.context.router.push({pathname: '/Dashboard'})
-    );
+    }).catch(({message}) => this.setState({error:message}));
   }
   handleChange(e, { name, value }){
     if(name === 'stayIn')
@@ -24,7 +28,7 @@ export default class Home extends Component {
     this.setState({ [name]: value });
   }
   render() {
-    const {stayIn, username, password} = this.state;
+    const {stayIn, username, password, message} = this.state;
     return (
       <div style={{display:'flex', alignItems:'center', justifyContent:'center', height:'100vh'}}>
         <Segment style={{'flex':0.75}}>
@@ -42,6 +46,13 @@ export default class Home extends Component {
               <Checkbox label="Stay Signed In" value={stayIn.toString()} defaultChecked name="stayIn" onChange={this.handleChange} />
             </Form.Field>
             <Button type="submit">Submit</Button>
+            {(message)?
+              <Message negatve>
+                <Message.Header>Error</Message.Header>
+                <p>{message}</p>
+              </Message>
+              :null
+            }
           </Form>
         </Segment>
       </div>

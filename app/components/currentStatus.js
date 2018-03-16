@@ -9,6 +9,10 @@ export default class CurrentStatus extends Component{
     this.state = {
 
     };
+    this.goto = this.goto.bind(this);
+  }
+  goto(path){
+    this.context.router.push({pathname: `/${path}`});
   }
   componentWillMount(){
     this.updateStatus()
@@ -33,6 +37,7 @@ export default class CurrentStatus extends Component{
           color="orange"
           meta="Some Offline"
           raised
+          onClick={()=> this.goto('Routers')}
         />
         <Card
           image="/assets/img/ph.png"
